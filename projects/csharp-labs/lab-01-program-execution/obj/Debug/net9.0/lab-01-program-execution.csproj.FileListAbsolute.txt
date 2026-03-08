@@ -1,0 +1,14 @@
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\bin\Debug\net9.0\lab-01-program-execution.exe
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\bin\Debug\net9.0\lab-01-program-execution.deps.json
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\bin\Debug\net9.0\lab-01-program-execution.runtimeconfig.json
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\bin\Debug\net9.0\lab-01-program-execution.dll
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\bin\Debug\net9.0\lab-01-program-execution.pdb
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.AssemblyInfo.cs
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.dll
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\refint\lab-01-program-execution.dll
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.pdb
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\lab-01-program-execution.genruntimeconfig.cache
+C:\Users\hp\source\repos\engineering-command-center\projects\csharp-labs\lab-01-program-execution\obj\Debug\net9.0\ref\lab-01-program-execution.dll
