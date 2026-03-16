@@ -1,0 +1,40 @@
+﻿using System;
+using System.Diagnostics;
+
+public struct PointStruct
+{
+    public int X;
+    public int Y;
+}
+
+public class PointClass
+{
+    public int X;
+    public int Y;
+}
+
+class Program
+{
+    static void Main()
+    {
+        const int N = 20_000_000;
+
+        var sw = Stopwatch.StartNew();
+        for (int i = 0; i < N; i++)
+        {
+            PointStruct p;
+            p.X = i;
+            p.Y = i;
+        }
+        sw.Stop();
+        Console.WriteLine($"Struct loop: {sw.Elapsed.TotalMilliseconds:F2} ms");
+
+        sw.Restart();
+        for (int i = 0; i < N; i++)
+        {
+            var p = new PointClass { X = i, Y = i };
+        }
+        sw.Stop();
+        Console.WriteLine($"Class loop: {sw.Elapsed.TotalMilliseconds:F2} ms");
+    }
+}
