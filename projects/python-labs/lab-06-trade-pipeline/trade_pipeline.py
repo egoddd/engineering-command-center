@@ -235,7 +235,7 @@ def print_report(result: PipelineResult,
 # Connects all stages. This is the main entry point.
 # ─────────────────────────────────────────────────────
 
-def run_pipeline(filepath: str) -> None:
+def run_pipeline(filepath: str, symbol_filter: str | None = None) -> None:
     """
     Orchestrate all pipeline stages:
     parse → validate → transform → aggregate → report
@@ -262,6 +262,10 @@ def run_pipeline(filepath: str) -> None:
 
         # Transform — calculate derived fields
         trade = transform_trade(record)
+
+        if symbol_filter and trade.symbol != symbol_filter:
+            continue
+
         valid_trades.append(trade)
 
     # Stage 4: aggregate
@@ -280,5 +284,13 @@ def run_pipeline(filepath: str) -> None:
 # ─────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    csv_path = sys.argv[1] if len(sys.argv) > 1 else 'trades.csv'
-    run_pipeline(csv_path)
+    csv_path = 'trades.csv'
+    symbol_filter = None
+
+    if len(sys.argv) >= 2:
+        csv_path = sys.argv[1]
+
+    if len(sys.argv) == 4 and sys.argv[2] == "--symbol":
+        symbol_filter = sys.argv[3].upper()
+
+    run_pipeline(csv_path, symbol_filter)
