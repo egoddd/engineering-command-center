@@ -1,0 +1,20 @@
+###Day 10 — Functional Patterns, Performance, and Composition
+
+Today focused on applying functional design patterns and understanding their real performance implications in Python and C#.
+
+I implemented a @validate_inputs decorator using inspect.signature to enforce input contracts across arbitrary function signatures, reinforcing how decorators can provide reusable validation logic without modifying core functions.
+
+I refactored the trade pipeline validator using functools.partial, extracting a generic validate_field_range function and deriving specialized validators (validate_quantity, validate_price). This demonstrated how partial application enables composable and configurable validation logic.
+
+In C#, I implemented extension methods on IEnumerable<Trade> to create fluent, reusable data operations like TotalNotional, AveragePrice, LargestTrade, and SplitBySide, and built a LINQ pipeline that chained filtering, grouping, aggregation, and sorting into a single expression.
+
+For memoization, I benchmarked an expensive symbol_metadata function with and without @lru_cache, observing ~180x speedup due to eliminating repeated work across identical inputs. This reinforced that caching is valid when a function is pure and deterministic.
+
+The exception vs Result benchmark revealed an important nuance: in Python, Result types are not zero-cost abstractions because they allocate objects and require pattern matching on every call. Exceptions appeared faster in microbenchmarks because the success path is extremely cheap, but this does not make them the correct tool for expected failures. The key takeaway is that performance depends on allocation patterns, not just control flow style.
+
+Overall, the lab emphasized:
+
+writing composable, side-effect-free functions
+making dependencies explicit
+understanding when abstractions carry runtime cost
+designing systems with both correctness and performance in mind
