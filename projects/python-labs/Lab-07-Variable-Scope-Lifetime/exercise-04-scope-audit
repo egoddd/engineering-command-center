@@ -1,0 +1,32 @@
+# Scope Audit for trade_pipeline.py
+#
+# Module-level variables found:
+#
+# 1. MAX_POSITION_SIZE
+#    Classification: constant that should stay global
+#    Reason: true constant, immutable business rule, safe at module scope.
+#
+# 2. DEFAULT_CURRENCY
+#    Classification: configuration value that should move into PipelineConfig
+#    Reason: environment- or deployment-specific setting, better passed explicitly.
+#
+# 3. INPUT_FILE
+#    Classification: configuration value that should move into PipelineConfig
+#    Reason: file path is runtime configuration, not a hardcoded global.
+#
+# 4. ERROR_COUNT
+#    Classification: mutable global that should be eliminated
+#    Reason: mutable global state makes behavior harder to reason about and test.
+#
+# 5. PROCESSED_TRADES
+#    Classification: mutable global that should be eliminated
+#    Reason: pipeline state should be local to run_pipeline() or returned explicitly.
+#
+# 6. LOGGER
+#    Classification: usually configuration/dependency that should be injected
+#    Reason: shared dependency should usually be passed in or constructed centrally.
+#
+# Summary:
+# - Keep only true constants at module level.
+# - Move runtime settings into PipelineConfig.
+# - Eliminate mutable globals by passing state as parameters or returning results.
