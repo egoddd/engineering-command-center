@@ -1,0 +1,92 @@
+from dataclasses import dataclass
+from typing import Protocol
+
+
+@dataclass
+class Trade:
+    trade_id: str
+    symbol: str
+    quantity: int
+    price: float
+    exchange: str | None = None
+
+
+class Validator(Protocol):
+    def validate(self, trade: Trade) -> bool: ...
+
+
+class Enricher(Protocol):
+    def enrich(self, trade: Trade) -> Trade: ...
+
+
+class Persister(Protocol):
+    def persist(self, trade: Trade) -> None: ...
+
+
+class TradeProcessor:
+    def __init__(self, validator: Validator, enricher: Enricher, persister: Persister):
+        self.validator = validator
+        self.enricher = enricher
+        self.persister = persister
+
+    def process(self, trade: Trade) -> bool:
+        if not self.validator.validate(trade):
+            return False
+
+        enriched = self.enricher.enrich(trade)
+        self.persister.persist(enriched)
+        return True
+
+
+class ConfigValidator:
+    def __init__(self, allowed_symbols: set[str]):
+        self.allowed_symbols = allowed_symbols
+
+    def validate(self, trade: Trade) -> bool:
+        return trade.symbol in self.allowed_symbols and trade.quantity > 0 and trade.price >= 0
+
+
+class SymbolEnricher:
+    def enrich(self, trade: Trade) -> Trade:
+        exchange_map = {
+            "AAPL": "NASDAQ",
+            "MSFT": "NASDAQ",
+            "GOOGL": "NASDAQ",
+        }
+        trade.exchange = exchange_map.get(trade.symbol, "UNKNOWN")
+        return trade
+
+
+class InMemoryPersister:
+    def __init__(self):
+        self.saved: list[Trade] = []
+
+    def persist(self, trade: Trade) -> None:
+        self.saved.append(trade)
+
+
+# Swappable component
+class RejectAllValidator:
+    def validate(self, trade: Trade) -> bool:
+        return False
+
+
+# Demo
+persister = InMemoryPersister()
+processor = TradeProcessor(
+    validator=ConfigValidator({"AAPL", "MSFT", "GOOGL"}),
+    enricher=SymbolEnricher(),
+    persister=persister,
+)
+
+trade = Trade("T1", "AAPL", 100, 180.0)
+print(processor.process(trade))
+print(persister.saved)
+
+processor2 = TradeProcessor(
+    validator=RejectAllValidator(),
+    enricher=SymbolEnricher(),
+    persister=persister,
+)
+
+print(processor2.process(Trade("T2", "MSFT", 50, 420.0)))
